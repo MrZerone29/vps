@@ -1,0 +1,22 @@
+services:
+  debian-vps:
+    build: .
+    container_name: vps
+
+    restart: unless-stopped
+
+    tty: true
+    stdin_open: true
+
+    cpus: 6.0
+    mem_limit: 20g
+    memswap_limit: 20g
+
+    shm_size: "4gb"
+
+    volumes:
+      - /home/user/vps:/root
+      - /mnt:/mnt-host
+
+    ports:
+      - "2222:22"
