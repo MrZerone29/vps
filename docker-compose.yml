@@ -19,4 +19,4 @@ services:
       - /mnt:/mnt-host
 
     ports:
-      - "22:22"
+      - "8080:8080"
