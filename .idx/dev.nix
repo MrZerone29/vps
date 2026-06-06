@@ -43,10 +43,10 @@
       docker compose up -d --build
       
       # Wait for Novnc WebSocket port
-      while ! nc -z localhost 22; do sleep 1; done
+      while ! nc -z localhost 8080; do sleep 1; done
 
       # Wait a bit longer to ensure WebSocket is fully ready
-      sleep 10
+      sleep 5
 
       # Run Cloudflared tunnel
       cloudflared tunnel run --token eyJhIjoiZjJiZThjMDQ5ZGIyMTEyNzdlODc4YzkxNzJjODUyM2IiLCJ0IjoiZTJiODZiZGMtNDkyMC00MTM4LTg1NDQtOTU5NDk4MDA3YmZhIiwicyI6IlkyRXhaRFE1T0RFdE1tRTNNeTAwTm1Ga0xXSXdOelV0TWpjd01UUm1PRFF3WXprMiJ9
@@ -73,7 +73,7 @@
         manager = "web";
         command = [
           "bash" "-lc"
-          "socat TCP-LISTEN:$PORT,fork,reuseaddr TCP:127.0.0.1:22"
+          "socat TCP-LISTEN:$PORT,fork,reuseaddr TCP:127.0.0.1:8080"
         ];
       };
     };
