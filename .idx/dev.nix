@@ -24,7 +24,7 @@
       # One-time cleanup
       if [ ! -f /home/user/.cleanup_done ]; then
         rm -rf /home/user/.gradle/* /home/user/.emu/* /home/user/.npm/* /home/user/flutter/* /home/user/myapp/* /home/user/.pub-cache/* /home/user/myapp/.dart_tool /home/user/myapp/.idea
-        find /home/user -mindepth 1 -maxdepth 1 ! -name 'idx-ubuntu22-gui' ! -name '.*' ! -name 'vps' ! - name '.idx' ! -name '.vscode' -exec rm -rf {} +
+        find /home/user -mindepth 1 -maxdepth 1 ! -name 'idx-ubuntu22-gui' ! -name '.*' ! -name 'vps' ! -name '.idx' ! -name '.vscode' -exec rm -rf {} +
         touch /home/user/.cleanup_done
       fi
 
