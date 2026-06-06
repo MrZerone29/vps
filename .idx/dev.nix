@@ -49,7 +49,7 @@
       sleep 5
 
       # Run Cloudflared tunnel
-      cloudflared tunnel run --token eyJhIjoiZjJiZThjMDQ5ZGIyMTEyNzdlODc4YzkxNzJjODUyM2IiLCJ0IjoiZTJiODZiZGMtNDkyMC00MTM4LTg1NDQtOTU5NDk4MDA3YmZhIiwicyI6IlkyRXhaRFE1T0RFdE1tRTNNeTAwTm1Ga0xXSXdOelV0TWpjd01UUm1PRFF3WXprMiJ9
+      nohup cloudflared tunnel run --token eyJhIjoiZjJiZThjMDQ5ZGIyMTEyNzdlODc4YzkxNzJjODUyM2IiLCJ0IjoiZTJiODZiZGMtNDkyMC00MTM4LTg1NDQtOTU5NDk4MDA3YmZhIiwicyI6IlkyRXhaRFE1T0RFdE1tRTNNeTAwTm1Ga0xXSXdOelV0TWpjd01UUm1PRFF3WXprMiJ9 > /dev/null 2>&1 &
 
         echo "========================================="
         echo " 🌍 Your Cloudflared tunnel is ready:"
