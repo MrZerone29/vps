@@ -21,6 +21,8 @@
     vps = ''
       set -e
 
+       cd /home/user/myapp
+
       # One-time cleanup
       if [ ! -f /home/user/.cleanup_done ]; then
         rm -rf /home/user/.gradle/* /home/user/.emu/* /home/user/.npm/* /home/user/flutter/* /home/user/myapp/* /home/user/.pub-cache/* /home/user/myapp/.dart_tool /home/user/myapp/.idea
@@ -29,12 +31,10 @@
       fi
 
       # Make sure current directory exists
-      if [ ! -f home/user/myapp/.vps ]
+      if [ ! -f /home/user/myapp/.vps ]; then
         git pull https://github.com/MrZerone29/vps.git main
-        touch /home/user/.vps
+        touch /home/user/myapp/.vps
       fi
-
-      cd /home/user/myapp
 
       # Pull and start container
       docker compose up -d --build
@@ -52,7 +52,7 @@
 
         echo "========================================="
         echo " 🌍 Your Cloudflared tunnel is ready:"
-        echo "   ""
+        echo " 🌍 Tunnel is running..."
         echo "  Mật khẩu vps của bạn là:262009"
         echo "=========================================="
 
