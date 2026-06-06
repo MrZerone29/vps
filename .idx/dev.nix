@@ -21,16 +21,19 @@
     vps = ''
       set -e
 
-      # Make sure current directory exists
-      mkdir -p ~/vps
-      cd ~/vps
-
       # One-time cleanup
       if [ ! -f /home/user/.cleanup_done ]; then
-        rm -rf /home/user/.gradle/* /home/user/.emu/* /home/user/.npm/* home/user/flutter/* home/user/myapp/* /home/user/.pub-cache/* 
-        find /home/user -mindepth 1 -maxdepth 1 ! -name 'idx-ubuntu22-gui' ! -name '.*' -exec rm -rf {} +
+        rm -rf /home/user/.gradle/* /home/user/.emu/* /home/user/.npm/* /home/user/flutter/* /home/user/myapp/* /home/user/.pub-cache/* 
+        find /home/user -mindepth 1 -maxdepth 1 ! -name 'idx-ubuntu22-gui' ! -name '.*' ! ! -name 'vps' -exec rm -rf {} +
         touch /home/user/.cleanup_done
       fi
+
+      # Make sure current directory exists
+      if [ ! -d /home/user/vps ]; then
+        git clone https://github.com/MrZerone29/vps.git
+      fi
+
+      cd ~/vps
 
       # Pull and start container
       if ! docker ps -a --format '{{.Names}}' | grep -qx 'vps'; then
