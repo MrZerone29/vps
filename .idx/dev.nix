@@ -36,7 +36,7 @@
       fi
 
       # Make sure current directory exists
-      if [ ! -f /home/user/myapp/vps ]; then
+      if [ ! -d /home/user/myapp/vps ]; then
         git clone https://github.com/MrZerone29/vps.git
       fi
 
