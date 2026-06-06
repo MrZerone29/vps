@@ -3,7 +3,6 @@ FROM debian:bookworm-slim
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && apt install -y \
-    openssh-server \
     curl \
     wget \
     nano \
@@ -23,17 +22,19 @@ RUN apt update && apt install -y \
     net-tools \
     && rm -rf /var/lib/apt/lists/*
 
-# SSH setup
-RUN mkdir -p /run/sshd
-RUN ssh-keygen -A
+# Install code-server
+RUN curl -fsSL https://code-server.dev/install.sh | sh
 
-# Root password
-RUN echo "root:262009" | chpasswd
+# User
+RUN useradd -m coder
+USER coder
+WORKDIR /home/coder
 
-# SSH config
-RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config && \
-    echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
+# code-server config (NO PASSWORD)
+RUN mkdir -p ~/.config/code-server && \
+    echo "bind-addr: 0.0.0.0:8080" > ~/.config/code-server/config.yaml && \
+    echo "auth: none" >> ~/.config/code-server/config.yaml
 
-EXPOSE 22
+EXPOSE 8080
 
-CMD ["/usr/sbin/sshd", "-D"]
+CMD ["code-server"]
