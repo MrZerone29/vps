@@ -51,7 +51,7 @@
 
         echo "========================================="
         echo " 🌍 Your Cloudflared tunnel is ready:"
-        echo "   $URL"
+        echo "   ""
         echo "  Mật khẩu vps của bạn là:262009"
         echo "=========================================="
 
