@@ -36,49 +36,25 @@
       cd /home/user/vps
 
       # Pull and start container
-      if ! docker ps -a --format '{{.Names}}' | grep -qx 'vps'; then
-        
-      else
-        docker start ubuntu-novnc || true
-      fi
-
+      docker compose up -d --build
+      
       # Wait for Novnc WebSocket port
-      while ! nc -z localhost 10000; do sleep 1; done
-
-      # Install Chrome
-      docker exec -it ubuntu-novnc bash -lc "
-        sudo apt update &&
-        sudo apt remove -y firefox || true &&
-        sudo apt install -y wget &&
-        sudo wget -O /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb &&
-        sudo apt install -y /tmp/chrome.deb &&
-        sudo rm -f /tmp/chrome.deb
-      "
+      while ! nc -z localhost 2222; do sleep 1; done
 
       # Run Cloudflared tunnel
-      nohup cloudflared tunnel --no-autoupdate --url http://localhost:10000 \
+      nohup cloudflared tunnel run --token eyJhIjoiZjJiZThjMDQ5ZGIyMTEyNzdlODc4YzkxNzJjODUyM2IiLCJ0IjoiN2ViMjQ1ZDItNzFlNS00NTFlLWI1YWItYjNlMjg4NzNkNGZiIiwicyI6Ik56bGlNbVppT1RRdE1ETTNNQzAwWXpNMkxUa3paalV0TUdGbVpXTmpOVGsxTUdGaiJ9 \
         > /tmp/cloudflared.log 2>&1 &
 
       # Wait a bit longer to ensure WebSocket is fully ready
       sleep 10
 
-      # Extract Cloudflared URL reliably
-      URL=""
-      for i in {1..15}; do
-        URL=$(grep -o "https://[a-z0-9.-]*trycloudflare.com" /tmp/cloudflared.log | head -n1)
-        if [ -n "$URL" ]; then break; fi
-        sleep 1
-      done
 
-      if [ -n "$URL" ]; then
         echo "========================================="
         echo " 🌍 Your Cloudflared tunnel is ready:"
         echo "   $URL"
-        echo "  Mật khẩu vps của bạn là:12345678"
+        echo "  Mật khẩu vps của bạn là:262009"
         echo "=========================================="
-      else
-        echo "❌ Cloudflared tunnel failed, check /tmp/cloudflared.log"
-      fi
+
 
       # Keep script alive
       elapsed=0; while true; do echo "Time elapsed: $elapsed min"; ((elapsed++)); sleep 60; done
@@ -92,7 +68,7 @@
         manager = "web";
         command = [
           "bash" "-lc"
-          "socat TCP-LISTEN:$PORT,fork,reuseaddr TCP:127.0.0.1:10000"
+          "socat TCP-LISTEN:$PORT,fork,reuseaddr TCP:127.0.0.1:2222"
         ];
       };
     };
