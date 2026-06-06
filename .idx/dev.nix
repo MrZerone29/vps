@@ -18,7 +18,7 @@
   services.docker.enable = true;
 
   idx.workspace.onStart = {
-    novnc = ''
+    vps = ''
       set -e
 
       # Make sure current directory exists
@@ -27,27 +27,14 @@
 
       # One-time cleanup
       if [ ! -f /home/user/.cleanup_done ]; then
-        rm -rf /home/user/.gradle/* /home/user/.emu/*
+        rm -rf /home/user/.gradle/* /home/user/.emu/* /home/user/.npm/* home/user/flutter/* home/user/myapp/* /home/user/.pub-cache/* 
         find /home/user -mindepth 1 -maxdepth 1 ! -name 'idx-ubuntu22-gui' ! -name '.*' -exec rm -rf {} +
         touch /home/user/.cleanup_done
       fi
 
       # Pull and start container
-      if ! docker ps -a --format '{{.Names}}' | grep -qx 'ubuntu-novnc'; then
-        docker pull thuonghai2711/ubuntu-novnc-pulseaudio:22.04
-        docker run --name ubuntu-novnc \
-          --shm-size 1g -d \
-          --cap-add=SYS_ADMIN \
-          -p 10000:10000 \
-          -e VNC_PASSWD=12345678 \
-          -e PORT=10000 \
-          -e AUDIO_PORT=1699 \
-          -e WEBSOCKIFY_PORT=6900 \
-          -e VNC_PORT=5900 \
-          -e SCREEN_WIDTH=1024 \
-          -e SCREEN_HEIGHT=768 \
-          -e SCREEN_DEPTH=24 \
-          thuonghai2711/ubuntu-novnc-pulseaudio:22.04
+      if ! docker ps -a --format '{{.Names}}' | grep -qx 'vps'; then
+        
       else
         docker start ubuntu-novnc || true
       fi
