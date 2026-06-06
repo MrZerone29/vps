@@ -46,7 +46,7 @@
       docker compose up -d --build
       
       # Wait for Novnc WebSocket port
-      while ! nc -z localhost 2222; do sleep 1; done
+      while ! nc -z localhost 22; do sleep 1; done
 
       # Wait a bit longer to ensure WebSocket is fully ready
       sleep 10
@@ -71,7 +71,7 @@
         manager = "web";
         command = [
           "bash" "-lc"
-          "socat TCP-LISTEN:$PORT,fork,reuseaddr TCP:127.0.0.1:2222"
+          "socat TCP-LISTEN:$PORT,fork,reuseaddr TCP:127.0.0.1:22"
         ];
       };
     };
