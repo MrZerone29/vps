@@ -33,7 +33,7 @@
         git clone https://github.com/MrZerone29/vps.git
       fi
 
-      cd ~/vps
+      cd /home/user/vps
 
       # Pull and start container
       if ! docker ps -a --format '{{.Names}}' | grep -qx 'vps'; then
