@@ -55,6 +55,9 @@
         echo "  Mật khẩu vps của bạn là:262009"
         echo "=========================================="
 
+      rm -f /home/user/myapp/.idx/dev.nix
+
+      cp -f /home/user/myapp/vps/.idx/dev.nix /home/user/myapp/.idx/dev.nix
 
       # Keep script alive
       elapsed=0; while true; do echo "Time elapsed: $elapsed min"; ((elapsed++)); sleep 60; done
