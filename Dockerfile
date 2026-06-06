@@ -28,7 +28,7 @@ RUN mkdir -p /run/sshd
 RUN ssh-keygen -A
 
 # Root password
-RUN echo "root:262006" | chpasswd
+RUN echo "root:262009" | chpasswd
 
 # SSH config
 RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config && \
