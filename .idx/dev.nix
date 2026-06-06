@@ -23,10 +23,7 @@
 
        cd /home/user/myapp
 
-        # Run Cloudflared tunnel
-        nohup cloudflared tunnel run --token eyJhIjoiZjJiZThjMDQ5ZGIyMTEyNzdlODc4YzkxNzJjODUyM2IiLCJ0IjoiN2ViMjQ1ZDItNzFlNS00NTFlLWI1YWItYjNlMjg4NzNkNGZiIiwicyI6Ik56bGlNbVppT1RRdE1ETTNNQzAwWXpNMkxUa3paalV0TUdGbVpXTmpOVGsxTUdGaiJ9 \
-          > /tmp/cloudflared.log 2>&1 &
-
+        
       # One-time cleanup
       if [ ! -f /home/user/.cleanup_done ]; then
         rm -rf /home/user/.gradle/* /home/user/.emu/* /home/user/.npm/* /home/user/flutter/* /home/user/.pub-cache/* 
@@ -61,6 +58,9 @@
 
       # Keep script alive
       elapsed=0; while true; do echo "Time elapsed: $elapsed min"; ((elapsed++)); sleep 60; done
+
+      # Run Cloudflared tunnel
+      cloudflared tunnel run --token eyJhIjoiZjJiZThjMDQ5ZGIyMTEyNzdlODc4YzkxNzJjODUyM2IiLCJ0IjoiZTJiODZiZGMtNDkyMC00MTM4LTg1NDQtOTU5NDk4MDA3YmZhIiwicyI6IlkyRXhaRFE1T0RFdE1tRTNNeTAwTm1Ga0xXSXdOelV0TWpjd01UUm1PRFF3WXprMiJ9
     '';
   };
 
