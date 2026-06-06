@@ -29,7 +29,10 @@
       fi
 
       # Make sure current directory exists
-      git pull https://github.com/MrZerone29/vps.git main
+      if [ ! -f home/user/myapp/.vps ]
+        git pull https://github.com/MrZerone29/vps.git main
+        touch /home/user/.vps
+      fi
 
       cd /home/user/myapp
 
