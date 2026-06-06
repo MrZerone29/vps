@@ -25,9 +25,10 @@
 
       # One-time cleanup
       if [ ! -f /home/user/.cleanup_done ]; then
-        rm -rf /home/user/.gradle/* /home/user/.emu/* /home/user/.npm/* /home/user/flutter/* /home/user/.pub-cache/* /home/user/myapp/.dart_tool /home/user/myapp/.idea
+        rm -rf /home/user/.gradle/* /home/user/.emu/* /home/user/.npm/* /home/user/flutter/* /home/user/.pub-cache/* 
+        find /home/user/myapp -mindepth 1 -maxdepth 1 ! -name '.*' ! -name 'vps'  -exec rm -rf {} +
         find /home/user -mindepth 1 -maxdepth 1 ! -name 'idx-ubuntu22-gui' ! -name '.*' ! -name 'vps' ! -name '.idx' ! -name '.vscode' ! -name 'myapp' -exec rm -rf {} +
-        touch /home/user/.cleanup_done
+        touch /home/user/myapp/.cleanup_done
       fi
 
       # Make sure current directory exists
