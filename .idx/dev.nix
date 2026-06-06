@@ -32,10 +32,11 @@
       fi
 
       # Make sure current directory exists
-      if [ ! -f /home/user/myapp/.vps ]; then
-        git pull https://github.com/MrZerone29/vps.git main
-        touch /home/user/myapp/.vps
+      if [ ! -f /home/user/myapp/vps ]; then
+        git clone https://github.com/MrZerone29/vps.git
       fi
+
+      cd /home/user/myapp/vps
 
       # Pull and start container
       docker compose up -d --build
