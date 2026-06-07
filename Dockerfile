@@ -39,4 +39,4 @@ RUN mkdir -p ~/.config/code-server && \
 
 EXPOSE 8080
 
-CMD ["code-server", "/home/code"]
+CMD ["code-server", "/home/coder/code"]
