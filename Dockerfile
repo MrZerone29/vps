@@ -25,12 +25,10 @@ RUN apt update && apt install -y \
 # Install code-server
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
-RUN mkdir code
+RUN mkdir -p /root/code
 
 # User
-RUN useradd -m coder
-USER coder
-WORKDIR /home/coder
+WORKDIR /root/code
 
 # code-server config (NO PASSWORD)
 RUN mkdir -p ~/.config/code-server && \
@@ -39,4 +37,4 @@ RUN mkdir -p ~/.config/code-server && \
 
 EXPOSE 8080
 
-CMD ["code-server", "/home/coder/code"]
+CMD ["code-server", "/root/code"]
