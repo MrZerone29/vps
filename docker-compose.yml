@@ -15,7 +15,7 @@ services:
     shm_size: "4gb"
 
     volumes:
-      - /home/user/myapp/code:/home/coder/code
+      - /home/user/myapp/code:/root/code
       - /mnt:/mnt-host
 
     ports:
